@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Tajawal } from "next/font/google";
 import { defaultLocale } from "@/lib/i18n/config";
+import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 const tajawal = Tajawal({
   variable: "--font-tajawal",
@@ -15,9 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: getMetadataBase(),
   title: {
     default: "Asim AC Services | خدمة المكيفات عاصم",
     template: "%s | Asim AC Services",
