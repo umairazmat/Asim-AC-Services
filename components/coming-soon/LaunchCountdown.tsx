@@ -31,9 +31,16 @@ function getTimeLeft(targetMs: number): TimeLeft {
   return { days, hours, minutes, seconds: secs, total };
 }
 
+const PLACEHOLDER_UNITS = [
+  { value: "00", labelKey: "days" as const },
+  { value: "00", labelKey: "hours" as const },
+  { value: "00", labelKey: "minutes" as const },
+  { value: "00", labelKey: "seconds" as const },
+];
+
 export function LaunchCountdown({ locale, className = "" }: LaunchCountdownProps) {
   const targetMs = getLaunchTargetMs();
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => getTimeLeft(targetMs));
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
     const tick = () => setTimeLeft(getTimeLeft(targetMs));
@@ -42,14 +49,20 @@ export function LaunchCountdown({ locale, className = "" }: LaunchCountdownProps
     return () => window.clearInterval(id);
   }, [targetMs]);
 
-  const units = [
-    { value: timeLeft.days, label: LAUNCH_COUNTDOWN.units.days[locale], pad: false },
-    { value: timeLeft.hours, label: LAUNCH_COUNTDOWN.units.hours[locale], pad: true },
-    { value: timeLeft.minutes, label: LAUNCH_COUNTDOWN.units.minutes[locale], pad: true },
-    { value: timeLeft.seconds, label: LAUNCH_COUNTDOWN.units.seconds[locale], pad: true },
-  ];
+  const units = timeLeft
+    ? [
+        { value: String(timeLeft.days), label: LAUNCH_COUNTDOWN.units.days[locale], pad: false },
+        { value: pad(timeLeft.hours), label: LAUNCH_COUNTDOWN.units.hours[locale], pad: true },
+        { value: pad(timeLeft.minutes), label: LAUNCH_COUNTDOWN.units.minutes[locale], pad: true },
+        { value: pad(timeLeft.seconds), label: LAUNCH_COUNTDOWN.units.seconds[locale], pad: true },
+      ]
+    : PLACEHOLDER_UNITS.map((unit) => ({
+        value: unit.value,
+        label: LAUNCH_COUNTDOWN.units[unit.labelKey][locale],
+        pad: true,
+      }));
 
-  if (timeLeft.total <= 0) {
+  if (timeLeft && timeLeft.total <= 0) {
     return (
       <div className={`countdown-wrap ${className}`.trim()}>
         <p className="countdown-live text-sm font-bold sm:text-base">
@@ -62,7 +75,8 @@ export function LaunchCountdown({ locale, className = "" }: LaunchCountdownProps
   return (
     <div
       className={`countdown-wrap ${className}`.trim()}
-      aria-live="polite"
+      aria-live={timeLeft ? "polite" : "off"}
+      aria-busy={!timeLeft}
       aria-label={LAUNCH_COUNTDOWN.title[locale]}
     >
       <p className="countdown-title mb-2.5 text-[0.65rem] font-bold tracking-[0.12em] text-[var(--color-gold-light)] uppercase sm:text-xs">
@@ -73,9 +87,7 @@ export function LaunchCountdown({ locale, className = "" }: LaunchCountdownProps
         <div className="countdown-grid" dir="ltr">
         {units.map((unit, index) => (
           <div key={unit.label} className="countdown-unit">
-            <span className="countdown-value">
-              {unit.pad ? pad(unit.value) : unit.value}
-            </span>
+            <span className="countdown-value">{unit.value}</span>
             <span className="countdown-label">{unit.label}</span>
             {index < units.length - 1 ? (
               <span className="countdown-separator" aria-hidden="true">

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LocaleHtmlSync } from "@/components/i18n/LocaleHtmlSync";
-import { isLocale, locales } from "@/lib/i18n/config";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { isLocale, locales, type Locale } from "@/lib/i18n/config";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -41,6 +44,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
+      type: "website",
       locale: isArabic ? "ar_SA" : "en_US",
       alternateLocale: isArabic ? ["en_US"] : ["ar_SA"],
       title: isArabic
@@ -49,6 +53,7 @@ export async function generateMetadata({
       description: isArabic
         ? "جودة عالية • خدمة سريعة • أسعار مناسبة"
         : "HIGH QUALITY • FAST SERVICE • AFFORDABLE PRICES",
+      url: `/${rawLocale}`,
       images: ["/brand/poster.png"],
     },
   };
@@ -62,9 +67,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   return (
-    <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="site-shell">
       <LocaleHtmlSync />
-      {children}
+      <SiteHeader locale={locale} />
+      <main className="site-main">{children}</main>
+      <SiteFooter locale={locale} />
+      <WhatsAppButton locale={locale} />
     </div>
   );
 }
