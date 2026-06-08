@@ -791,6 +791,48 @@ html[dir="ltr"] .countdown-grid-wrap {
   }
 }
 
+/* ── Social links ── */
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+}
+
+@media (min-width: 40rem) {
+  .social-link {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+.social-link:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(1.08);
+}
+
+.social-link:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.social-link--instagram {
+  background: linear-gradient(135deg, #f77737 0%, #c13584 45%, #833ab4 100%);
+  box-shadow: 0 4px 16px rgba(193, 53, 132, 0.28);
+}
+
+.social-link--facebook {
+  background: linear-gradient(135deg, #4c8df5 0%, #1877f2 100%);
+  box-shadow: 0 4px 16px rgba(24, 119, 242, 0.28);
+}
+
 /* ── WhatsApp floating button ── */
 .whatsapp-float {
   position: fixed;

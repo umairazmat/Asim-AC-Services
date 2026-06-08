@@ -11,6 +11,7 @@ import { TrustBadges } from "@/components/coming-soon/TrustBadges";
 import { BookNowCta } from "@/components/coming-soon/BookNowCta";
 import { LaunchCountdown } from "@/components/coming-soon/LaunchCountdown";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 
 type ComingSoonPageProps = {
   locale: Locale;
@@ -123,6 +124,10 @@ export function ComingSoonPage({ locale: localeProp }: ComingSoonPageProps) {
             </div>
           </div>
         </main>
+
+        <footer className="fade-up fade-up--delay-3 mt-3 shrink-0 sm:mt-4">
+          <SocialLinks locale={locale} />
+        </footer>
       </div>
       </div>
 
