@@ -16,6 +16,9 @@ import { FlagIcon } from "@/components/ui/FlagIcon";
 
 type LanguageSwitcherProps = {
   locale?: Locale;
+  variant?: "default" | "header";
+  compact?: "default" | "flags";
+  className?: string;
 };
 
 function persistLocale(nextLocale: Locale) {
@@ -25,7 +28,12 @@ function persistLocale(nextLocale: Locale) {
   document.documentElement.classList.add("locale-switching");
 }
 
-export function LanguageSwitcher({ locale: localeProp = defaultLocale }: LanguageSwitcherProps) {
+export function LanguageSwitcher({
+  locale: localeProp = defaultLocale,
+  variant = "default",
+  compact = "default",
+  className = "",
+}: LanguageSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -44,7 +52,7 @@ export function LanguageSwitcher({ locale: localeProp = defaultLocale }: Languag
 
   return (
     <div
-      className={`lang-switch ${isPending ? "lang-switch--pending" : ""}`}
+      className={`lang-switch ${variant === "header" ? "lang-switch--header" : ""} ${compact === "flags" ? "lang-switch--flags" : ""} ${isPending ? "lang-switch--pending" : ""} ${className}`.trim()}
       dir="ltr"
       role="group"
       aria-label={locale === "ar" ? "تبديل اللغة" : "Language switcher"}
@@ -67,7 +75,7 @@ export function LanguageSwitcher({ locale: localeProp = defaultLocale }: Languag
               aria-current="true"
             >
               <FlagIcon code={labels.flag} title={labels.ariaLabel} />
-              <span>{labels.native}</span>
+              <span className="lang-switch-option__label">{labels.native}</span>
             </span>
           );
         }
@@ -87,7 +95,7 @@ export function LanguageSwitcher({ locale: localeProp = defaultLocale }: Languag
             }}
           >
             <FlagIcon code={labels.flag} title={labels.ariaLabel} />
-            <span>{labels.native}</span>
+            <span className="lang-switch-option__label">{labels.native}</span>
           </Link>
         );
       })}

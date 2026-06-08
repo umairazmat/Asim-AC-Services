@@ -1,26 +1,26 @@
-"use client";
-
 import { getWhatsAppUrl } from "@/lib/constants/contact";
+import type { Locale } from "@/lib/i18n/config";
 
 type WhatsAppButtonProps = {
-  locale?: "ar" | "en";
+  locale: Locale;
 };
 
-export function WhatsAppButton({ locale = "ar" }: WhatsAppButtonProps) {
+export function WhatsAppButton({ locale }: WhatsAppButtonProps) {
+  const label = locale === "ar" ? "تواصل عبر واتساب" : "Chat on WhatsApp";
+
   return (
     <a
       href={getWhatsAppUrl(locale)}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={
-        locale === "ar"
-          ? "تواصل معنا عبر واتساب"
-          : "Contact us on WhatsApp"
-      }
-      className="whatsapp-float group fixed z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-whatsapp)] text-white shadow-[0_8px_28px_rgba(37,211,102,0.45)] ring-2 ring-white/20 transition-transform hover:scale-105 active:scale-95 lg:hidden"
+      aria-label={label}
+      className="whatsapp-float"
     >
       <span className="whatsapp-pulse" aria-hidden="true" />
-      <WhatsAppIcon className="h-6 w-6" />
+      <span className="whatsapp-float__icon" aria-hidden="true">
+        <WhatsAppIcon className="h-6 w-6" />
+      </span>
+      <span className="whatsapp-float__label">{label}</span>
     </a>
   );
 }

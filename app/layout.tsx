@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Tajawal } from "next/font/google";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ThemeScript } from "@/components/theme/ThemeScript";
 import { defaultLocale } from "@/lib/i18n/config";
 import { getMetadataBase, getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -55,9 +57,14 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
+      data-theme="light"
+      suppressHydrationWarning
       className={`${tajawal.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full overflow-x-hidden overflow-y-auto">{children}</body>
+      <body className="min-h-full overflow-x-hidden overflow-y-auto">
+        <ThemeScript />
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

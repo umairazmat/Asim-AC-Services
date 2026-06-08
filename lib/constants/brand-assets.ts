@@ -1,9 +1,9 @@
 export const BRAND_ASSETS = {
   logos: {
-    horizontalLight: "/brand/assets/logos/logo-horizontal-light.png",
+    horizontalLight: "/brand/assets/logos/logo-horizontal-light-cropped.png",
     horizontalDark: "/brand/assets/logos/logo-horizontal-dark.png",
-    horizontalTransparent: "/brand/assets/logos/logo-horizontal-transparent.png",
-    monochromeWhite: "/brand/assets/logos/logo-monochrome-white.png",
+    horizontalTransparent: "/brand/assets/logos/logo-horizontal-transparent-cropped.png",
+    monochromeWhite: "/brand/assets/logos/logo-monochrome-white-cropped.png",
   },
   photos: {
     heroIndoorService: "/brand/assets/photos/hero-indoor-service.png",

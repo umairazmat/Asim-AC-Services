@@ -61,7 +61,7 @@ export function ServiceGrid({
                 className="icon-glyph h-[1.125rem] w-[1.125rem] sm:h-5 sm:w-5"
               />
             </span>
-            <span className="service-card-label min-w-0 flex-1 text-[0.62rem] leading-snug font-semibold text-white sm:text-[0.7rem] lg:text-[0.72rem]">
+            <span className="service-card-label site-text min-w-0 flex-1 text-[0.62rem] leading-snug font-semibold sm:text-[0.7rem] lg:text-[0.72rem]">
               {service.label[locale]}
             </span>
           </div>

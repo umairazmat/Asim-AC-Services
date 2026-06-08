@@ -33,7 +33,7 @@ export function TrustBadges({ locale, compact = false }: TrustBadgesProps) {
               className="icon-glyph h-4 w-4 sm:h-[1.125rem] sm:w-[1.125rem]"
             />
           </span>
-          <span className="text-[0.58rem] leading-snug font-semibold break-words text-white sm:text-[0.65rem]">
+          <span className="site-text text-[0.58rem] leading-snug font-semibold break-words sm:text-[0.65rem]">
             {badge.label[locale]}
           </span>
         </div>

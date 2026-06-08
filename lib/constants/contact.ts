@@ -1,7 +1,12 @@
 export const CONTACT = {
+  location: {
+    label: { ar: "الرياض · العليا", en: "Riyadh · Al Olaya" },
+    mapsUrl: "https://www.google.com/maps?q=24.718685,46.6713346&z=17&hl=en",
+  },
   whatsapp: {
     display: "+966 5475 24002",
     href: "https://wa.me/966547524002",
+    tel: "tel:+966547524002",
     message: {
       ar: "مرحباً، أود الاستفسار عن خدمات المكيفات.",
       en: "Hello, I would like to inquire about AC services.",
