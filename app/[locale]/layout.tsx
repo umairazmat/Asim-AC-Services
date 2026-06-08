@@ -41,6 +41,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
+      type: "website",
       locale: isArabic ? "ar_SA" : "en_US",
       alternateLocale: isArabic ? ["en_US"] : ["ar_SA"],
       title: isArabic
@@ -49,6 +50,7 @@ export async function generateMetadata({
       description: isArabic
         ? "جودة عالية • خدمة سريعة • أسعار مناسبة"
         : "HIGH QUALITY • FAST SERVICE • AFFORDABLE PRICES",
+      url: `/${rawLocale}`,
       images: ["/brand/poster.png"],
     },
   };

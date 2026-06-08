@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Tajawal } from "next/font/google";
 import { defaultLocale } from "@/lib/i18n/config";
-import { getMetadataBase } from "@/lib/site-url";
+import { getMetadataBase, getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 const tajawal = Tajawal({
   variable: "--font-tajawal",
@@ -30,6 +30,19 @@ export const metadata: Metadata = {
       en: "/en",
       "x-default": "/ar",
     },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Asim AC Services",
+    url: getSiteUrl(),
   },
 };
 
