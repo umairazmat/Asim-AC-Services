@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LocaleHtmlSync } from "@/components/i18n/LocaleHtmlSync";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { LeadCaptureProvider } from "@/components/providers/LeadCaptureProvider";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { isLocale, locales, type Locale } from "@/lib/i18n/config";
 
@@ -67,12 +68,14 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   return (
-    <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="site-shell">
-      <LocaleHtmlSync />
-      <SiteHeader locale={locale} />
-      <main className="site-main">{children}</main>
-      <SiteFooter locale={locale} />
-      <WhatsAppButton locale={locale} />
-    </div>
+    <LeadCaptureProvider locale={locale}>
+      <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="site-shell">
+        <LocaleHtmlSync />
+        <SiteHeader locale={locale} />
+        <main className="site-main">{children}</main>
+        <SiteFooter locale={locale} />
+        <WhatsAppButton locale={locale} />
+      </div>
+    </LeadCaptureProvider>
   );
 }

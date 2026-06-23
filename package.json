@@ -9,9 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "libphonenumber-js": "^1.13.7",
     "next": "16.2.7",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-phone-number-input": "^3.4.17",
+    "resend": "^6.14.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

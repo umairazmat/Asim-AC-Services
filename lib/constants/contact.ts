@@ -1,4 +1,9 @@
 export const CONTACT = {
+  email: {
+    address: "asimacservices@gmail.com",
+    href: "mailto:asimacservices@gmail.com",
+    label: { ar: "asimacservices@gmail.com", en: "asimacservices@gmail.com" },
+  },
   location: {
     label: { ar: "الرياض · العليا", en: "Riyadh · Al Olaya" },
     mapsUrl: "https://www.google.com/maps?q=24.718685,46.6713346&z=17&hl=en",
