@@ -1,15 +1,19 @@
-import { CONTACT, getWhatsAppUrl } from "@/lib/constants/contact";
+"use client";
+
+import { CONTACT } from "@/lib/constants/contact";
+import { useLeadCapture } from "@/components/providers/LeadCaptureProvider";
 
 type BookNowCtaProps = {
   locale: "ar" | "en";
 };
 
 export function BookNowCta({ locale }: BookNowCtaProps) {
+  const { openModal } = useLeadCapture();
+
   return (
-    <a
-      href={getWhatsAppUrl(locale)}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      type="button"
+      onClick={openModal}
       className="cta-bar group flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-white sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3.5 lg:rounded-3xl lg:px-5 lg:py-4"
     >
       <span className="cta-icon-wrap flex h-9 w-9 shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 lg:h-12 lg:w-12">
@@ -17,7 +21,7 @@ export function BookNowCta({ locale }: BookNowCtaProps) {
       </span>
       <span className="flex min-w-0 flex-1 flex-col items-start leading-none">
         <span className="text-[0.8125rem] font-bold leading-snug text-balance sm:text-sm lg:text-base">
-          {locale === "ar" ? "احجز عبر واتساب الآن" : "Book on WhatsApp Now"}
+          {locale === "ar" ? "احجز خدمتك الآن" : "Book Your Service Now"}
         </span>
         <span
           className="mt-1 text-[0.6875rem] font-semibold text-white/95 sm:mt-1.5 sm:text-xs"
@@ -32,7 +36,7 @@ export function BookNowCta({ locale }: BookNowCtaProps) {
       >
         →
       </span>
-    </a>
+    </button>
   );
 }
 

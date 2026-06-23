@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
+import { FooterBookButton } from "@/components/layout/FooterBookButton";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { BRAND } from "@/lib/constants/brand";
 import { BRAND_ASSETS } from "@/lib/constants/brand-assets";
@@ -88,6 +89,12 @@ export function SiteFooter({ locale }: SiteFooterProps) {
                   <span>{CONTACT.whatsapp.display}</span>
                 </a>
               </li>
+              <li>
+                <a href={CONTACT.email.href} className="site-footer__contact-item" dir="ltr">
+                  <EmailIcon />
+                  <span>{CONTACT.email.label[locale]}</span>
+                </a>
+              </li>
             </ul>
 
             <div className="site-footer__cta-row">
@@ -141,6 +148,11 @@ export function SiteFooter({ locale }: SiteFooterProps) {
                 </a>
               </li>
               <li>
+                <a href={CONTACT.email.href} className="site-footer__link" dir="ltr">
+                  {CONTACT.email.label[locale]}
+                </a>
+              </li>
+              <li>
                 <a
                   href={getWhatsAppUrl(locale)}
                   target="_blank"
@@ -162,14 +174,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
               </li>
             </ul>
 
-            <a
-              href={getWhatsAppUrl(locale)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="site-footer__book-btn"
-            >
-              {locale === "ar" ? "احجز الخدمة" : "Book Service"}
-            </a>
+            <FooterBookButton locale={locale} />
           </div>
         </div>
 
@@ -227,6 +232,14 @@ function PhoneIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0">
       <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+    </svg>
+  );
+}
+
+function EmailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0">
+      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
     </svg>
   );
 }
