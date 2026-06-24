@@ -20,7 +20,7 @@ export function BookServiceButton({
   return (
     <button
       type="button"
-      onClick={openModal}
+      onClick={() => openModal()}
       className={`book-service-btn ${compact ? "book-service-btn--compact" : ""} ${className}`.trim()}
     >
       <span className="book-service-btn__icon">

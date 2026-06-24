@@ -66,10 +66,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Service required" }, { status: 400 });
   }
 
-  if (!areaId?.trim() || !areaLabel?.trim()) {
-    return NextResponse.json({ ok: false, error: "Area required" }, { status: 400 });
-  }
-
   if (!countryIso?.trim() || !countryDial?.trim() || !phone?.trim()) {
     return NextResponse.json({ ok: false, error: "Phone required" }, { status: 400 });
   }
@@ -84,8 +80,8 @@ export async function POST(request: Request) {
     locale,
     serviceId: serviceId.trim(),
     serviceLabel: serviceLabel.trim(),
-    areaId: areaId.trim(),
-    areaLabel: areaLabel.trim(),
+    areaId: areaId?.trim() || undefined,
+    areaLabel: areaLabel?.trim() || undefined,
     countryIso: countryIso.trim(),
     countryDial: countryDial.replace(/\D/g, ""),
     phone: normalizedPhone,

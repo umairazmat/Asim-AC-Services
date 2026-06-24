@@ -43,6 +43,8 @@ export const SERVICES = [
   },
 ] as const;
 
+export type ServiceId = (typeof SERVICES)[number]["id"];
+
 export const TRUST_BADGES = [
   {
     id: "fast",

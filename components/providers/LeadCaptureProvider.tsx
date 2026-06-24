@@ -16,9 +16,11 @@ import {
   LEAD_STORAGE_KEYS,
 } from "@/lib/constants/lead-form";
 import type { Locale } from "@/lib/i18n/config";
+import type { ServiceId } from "@/lib/constants/services";
+import type { LeadModalOptions } from "@/lib/leads/types";
 
 type LeadCaptureContextValue = {
-  openModal: () => void;
+  openModal: (options?: LeadModalOptions) => void;
   closeModal: () => void;
 };
 
@@ -55,6 +57,8 @@ function isDismissCooldownActive(): boolean {
 
 export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderProps) {
   const [open, setOpen] = useState(false);
+  const [initialIssue, setInitialIssue] = useState("");
+  const [initialServiceId, setInitialServiceId] = useState<ServiceId | "">("");
   const pathname = usePathname();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const initialShownRef = useRef(false);
@@ -85,8 +89,10 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
     [canAutoShow, clearTimer],
   );
 
-  const openModal = useCallback(() => {
+  const openModal = useCallback((options?: LeadModalOptions) => {
     clearTimer();
+    setInitialIssue(options?.issue ?? "");
+    setInitialServiceId(options?.serviceId ?? "");
     setOpen(true);
   }, [clearTimer]);
 
@@ -153,6 +159,8 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
       <LeadCaptureModal
         locale={locale}
         open={open}
+        initialIssue={initialIssue}
+        initialServiceId={initialServiceId || undefined}
         onClose={closeModal}
         onSubmitted={handleSubmitted}
       />

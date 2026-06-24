@@ -12,7 +12,7 @@ export function FooterBookButton({ locale }: FooterBookButtonProps) {
   const { openModal } = useLeadCapture();
 
   return (
-    <button type="button" onClick={openModal} className="site-footer__book-btn">
+    <button type="button" onClick={() => openModal()} className="site-footer__book-btn">
       {locale === "ar" ? "احجز الخدمة" : "Book Service"}
     </button>
   );

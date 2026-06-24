@@ -2,11 +2,13 @@ type SnowflakeIconProps = {
   className?: string;
 };
 
-export function SnowflakeIcon({ className }: SnowflakeIconProps) {
+export function SnowflakeIcon({ className = "h-4 w-4 shrink-0" }: SnowflakeIconProps) {
   return (
     <svg
       className={className}
       viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"

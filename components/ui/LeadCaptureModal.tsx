@@ -10,10 +10,13 @@ import { SERVICES } from "@/lib/constants/services";
 import type { LeadLocation, LeadPayload } from "@/lib/leads/types";
 import { getLeadWhatsAppUrl, openLeadWhatsApp } from "@/lib/leads/whatsapp-lead-url";
 import type { Locale } from "@/lib/i18n/config";
+import type { ServiceId } from "@/lib/constants/services";
 
 type LeadCaptureModalProps = {
   locale: Locale;
   open: boolean;
+  initialIssue?: string;
+  initialServiceId?: ServiceId;
   onClose: () => void;
   onSubmitted: () => void;
 };
@@ -28,6 +31,8 @@ type FormErrors = {
 export function LeadCaptureModal({
   locale,
   open,
+  initialIssue = "",
+  initialServiceId,
   onClose,
   onSubmitted,
 }: LeadCaptureModalProps) {
@@ -62,8 +67,17 @@ export function LeadCaptureModal({
   useEffect(() => {
     if (!open) {
       resetForm();
+      return;
     }
-  }, [open, resetForm]);
+
+    if (initialServiceId) {
+      setServiceId(initialServiceId);
+    }
+
+    if (initialIssue) {
+      setIssue(initialIssue);
+    }
+  }, [open, initialIssue, initialServiceId, resetForm]);
 
   useEffect(() => {
     if (!open) return;

@@ -17,7 +17,7 @@ export function HeroCtas({ locale }: HeroCtasProps) {
     <div className="home-hero__ctas">
       <button
         type="button"
-        onClick={openModal}
+        onClick={() => openModal()}
         className="home-hero__cta home-hero__cta--primary"
       >
         <span>{bookCta[locale]}</span>
