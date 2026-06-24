@@ -1,7 +1,7 @@
 /** Launch countdown — update target when the go-live date is confirmed */
 export const LAUNCH_COUNTDOWN = {
-  /** 2 weeks from project kickoff (June 6 → June 20, 2026), end of day Riyadh */
-  targetIso: "2026-06-20T23:59:59+03:00",
+  /** 1 week from go-live confirmation (June 23 → June 30, 2026), end of day Riyadh */
+  targetIso: "2026-06-30T23:59:59+03:00",
   title: {
     ar: "العد التنازلي للإطلاق",
     en: "Launch Countdown",

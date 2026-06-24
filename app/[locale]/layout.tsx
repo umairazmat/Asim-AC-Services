@@ -30,33 +30,13 @@ export async function generateMetadata({
   const isArabic = rawLocale === "ar";
 
   return {
-    title: isArabic
-      ? "خدمة المكيفات عاصم — قريباً"
-      : "Asim AC Services — Coming Soon",
+    title: {
+      default: isArabic ? "خدمة المكيفات عاصم" : "Asim AC Services",
+      template: isArabic ? "%s | خدمة المكيفات عاصم" : "%s | Asim AC Services",
+    },
     description: isArabic
       ? "خدمة مكيفات احترافية في الرياض. تواصل معنا عبر واتساب للحجز والاستفسار."
       : "Professional AC cleaning, maintenance, and repair in Riyadh. Contact us on WhatsApp to book or inquire.",
-    alternates: {
-      canonical: `/${rawLocale}`,
-      languages: {
-        ar: "/ar",
-        en: "/en",
-        "x-default": "/ar",
-      },
-    },
-    openGraph: {
-      type: "website",
-      locale: isArabic ? "ar_SA" : "en_US",
-      alternateLocale: isArabic ? ["en_US"] : ["ar_SA"],
-      title: isArabic
-        ? "خدمة المكيفات عاصم — قريباً"
-        : "Asim AC Services — Coming Soon",
-      description: isArabic
-        ? "جودة عالية • خدمة سريعة • أسعار مناسبة"
-        : "HIGH QUALITY • FAST SERVICE • AFFORDABLE PRICES",
-      url: `/${rawLocale}`,
-      images: ["/brand/poster.png"],
-    },
   };
 }
 
