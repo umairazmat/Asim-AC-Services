@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { HOME_CONTENT } from "@/app/[locale]/home/content";
 import type { Locale } from "@/lib/i18n/config";
-
+import { getPageAlternates } from "@/lib/i18n/pages";
 export function generateHomeMetadata(locale: Locale): Metadata {
   const { metadata } = HOME_CONTENT;
   const isArabic = locale === "ar";
@@ -9,14 +9,7 @@ export function generateHomeMetadata(locale: Locale): Metadata {
   return {
     title: metadata.title[locale],
     description: metadata.description[locale],
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        ar: "/ar",
-        en: "/en",
-        "x-default": "/ar",
-      },
-    },
+    alternates: getPageAlternates("home", locale),
     openGraph: {
       type: "website",
       locale: isArabic ? "ar_SA" : "en_US",

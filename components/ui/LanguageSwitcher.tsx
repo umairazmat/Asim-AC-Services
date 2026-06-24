@@ -5,12 +5,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
 import {
   defaultLocale,
-  getLocalePath,
   localeLabels,
   locales,
   LOCALE_COOKIE,
   type Locale,
 } from "@/lib/i18n/config";
+import { getLocalePath } from "@/lib/i18n/pages";
 import { useLocale } from "@/lib/i18n/use-locale";
 import { FlagIcon } from "@/components/ui/FlagIcon";
 

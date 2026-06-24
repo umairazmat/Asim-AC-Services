@@ -1,18 +1,35 @@
 import type { MetadataRoute } from "next";
-import { defaultLocale, locales } from "@/lib/i18n/config";
+import { defaultLocale } from "@/lib/i18n/config";
+import { getSitemapEntries } from "@/lib/i18n/pages";
 import { getSiteUrl } from "@/lib/site-url";
-
-const PUBLIC_PATHS = ["", "/about", "/services", "/contact"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getSiteUrl();
 
-  return locales.flatMap((locale) =>
-    PUBLIC_PATHS.map((path) => ({
-      url: `${baseUrl}/${locale}${path}`,
+  return getSitemapEntries().flatMap(({ ar, en }) => [
+    {
+      url: `${baseUrl}${ar}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
-      priority: path === "" && locale === defaultLocale ? 1 : 0.8,
-    })),
-  );
+      priority: ar === `/${defaultLocale}` ? 1 : 0.8,
+      alternates: {
+        languages: {
+          ar: `${baseUrl}${ar}`,
+          en: `${baseUrl}${en}`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}${en}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: en === "/en" ? 0.9 : 0.8,
+      alternates: {
+        languages: {
+          ar: `${baseUrl}${ar}`,
+          en: `${baseUrl}${en}`,
+        },
+      },
+    },
+  ]);
 }

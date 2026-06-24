@@ -33,11 +33,3 @@ export const localeLabels: Record<
 };
 
 export const LOCALE_COOKIE = "NEXT_LOCALE";
-
-export function getLocalePath(pathname: string, locale: Locale): string {
-  const normalized = pathname.replace(/\/$/, "") || "/";
-  const stripped =
-    normalized.replace(/^\/(ar|en)(?=\/|$)/, "") || "";
-  const suffix = stripped === "/" ? "" : stripped;
-  return `/${locale}${suffix}`;
-}

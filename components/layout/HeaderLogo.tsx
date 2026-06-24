@@ -20,7 +20,7 @@ export function HeaderLogo({ locale }: HeaderLogoProps) {
 
   return (
     <Link
-      href={getNavHref(locale, "")}
+      href={getNavHref(locale, "home")}
       className={`header-logo ${isDark ? "header-logo--dark" : "header-logo--light"}`}
       aria-label={locale === "ar" ? "العودة للرئيسية" : "Back to home"}
     >

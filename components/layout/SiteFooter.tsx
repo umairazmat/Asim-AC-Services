@@ -10,6 +10,7 @@ import { FOOTER } from "@/lib/constants/footer";
 import { getNavHref, NAV_ITEMS } from "@/lib/constants/navigation";
 import { SERVICES, TRUST_BADGES } from "@/lib/constants/services";
 import type { Locale } from "@/lib/i18n/config";
+import type { PageId } from "@/lib/i18n/pages";
 
 type SiteFooterProps = {
   locale: Locale;
@@ -45,6 +46,15 @@ const TRUST_ICON_CLASS: Record<(typeof TRUST_BADGES)[number]["color"], string> =
   violet: "site-footer__badge-icon--violet",
 };
 
+const SERVICE_PAGE_IDS: Record<(typeof SERVICES)[number]["id"], PageId> = {
+  cleaning: "ac-cleaning-riyadh",
+  gas: "ac-gas-refill-riyadh",
+  cooling: "ac-services-riyadh",
+  repair: "ac-repair-riyadh",
+  installation: "ac-installation-riyadh",
+  duct: "commercial-hvac-riyadh",
+};
+
 export function SiteFooter({ locale }: SiteFooterProps) {
   return (
     <footer className="site-footer">
@@ -52,7 +62,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
         <div className="header-shell site-footer__grid">
           <div className="site-footer__brand">
             <Link
-              href={getNavHref(locale, "")}
+              href={getNavHref(locale, "home")}
               className="site-footer__logo"
               aria-label={locale === "ar" ? "العودة للرئيسية" : "Back to home"}
             >
@@ -118,7 +128,10 @@ export function SiteFooter({ locale }: SiteFooterProps) {
             <ul className="site-footer__links">
               {SERVICES.map((service) => (
                 <li key={service.id}>
-                  <Link href={getNavHref(locale, "/services")} className="site-footer__link">
+                  <Link
+                    href={getNavHref(locale, SERVICE_PAGE_IDS[service.id])}
+                    className="site-footer__link"
+                  >
                     {service.label[locale]}
                   </Link>
                 </li>
@@ -131,7 +144,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
             <ul className="site-footer__links">
               {NAV_ITEMS.map((item) => (
                 <li key={item.id}>
-                  <Link href={getNavHref(locale, item.href)} className="site-footer__link">
+                  <Link href={getNavHref(locale, item.pageId)} className="site-footer__link">
                     {item.label[locale]}
                   </Link>
                 </li>

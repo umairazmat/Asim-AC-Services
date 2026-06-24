@@ -21,8 +21,8 @@ export function HeaderNav({ locale, onNavigate, className = "" }: HeaderNavProps
     >
       <ul className="header-nav__list">
         {NAV_ITEMS.map((item) => {
-          const href = getNavHref(locale, item.href);
-          const active = isNavActive(pathname, locale, item.href);
+          const href = getNavHref(locale, item.pageId);
+          const active = isNavActive(pathname, locale, item.pageId);
 
           return (
             <li key={item.id}>
