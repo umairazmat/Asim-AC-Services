@@ -1,0 +1,41 @@
+/** District IDs shown on the Service Areas hub page (ordered list per SEO spec). */
+export const SERVICE_AREAS_HUB_DISTRICT_IDS = [
+  "olaya",
+  "sulaimaniyah",
+  "sahafa",
+  "yasmin",
+  "narjis",
+  "malqa",
+  "nakheel",
+  "hittin",
+  "qirawan",
+  "arid",
+  "hamra",
+  "wurud",
+  "rabwah",
+  "mohammadiyah",
+  "murooj",
+  "granada",
+  "rawdah",
+  "malaz",
+  "naseem",
+  "shifa",
+  "aziziyah",
+  "manar",
+  "ghadir",
+  "aqiq",
+  "murabba",
+  "batha",
+  "suwaidi",
+  "shubra",
+] as const;
+
+/** Nearby area chips for the Al Olaya local landing page. */
+export const AL_OLAYA_NEARBY_AREA_IDS = [
+  "sulaimaniyah",
+  "wurud",
+  "murooj",
+  "mohammadiyah",
+  "murabba",
+  "king-fahd",
+] as const;

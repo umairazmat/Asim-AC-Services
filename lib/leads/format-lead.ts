@@ -2,7 +2,7 @@ import type { LeadPayload } from "@/lib/leads/types";
 
 export function formatLeadPlainText(lead: LeadPayload): string {
   const lines = [
-    "🆕 New lead — Asim AC Services",
+    "🆕 New lead: Asim AC Services",
     "",
     `Service: ${lead.serviceLabel}`,
     lead.areaLabel ? `Area: ${lead.areaLabel}` : null,

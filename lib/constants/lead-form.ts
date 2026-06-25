@@ -8,12 +8,12 @@ export const LEAD_FORM = {
     en: "What service do you need?",
   },
   subtitle: {
-    ar: "سجّل طلبك — يُرسل بالبريد ويفتح واتساب لتأكيد الحجز.",
-    en: "Submit your request — saved by email & WhatsApp opens to confirm booking.",
+    ar: "سجّل طلبك. يُرسل بالبريد ويفتح واتساب لتأكيد الحجز.",
+    en: "Submit your request. Saved by email and WhatsApp opens to confirm booking.",
   },
   secure: {
-    ar: "بياناتك آمنة — للتواصل فقط وفق نظام حماية البيانات في المملكة",
-    en: "Secure & private — contact only, per KSA data protection",
+    ar: "بياناتك آمنة، للتواصل فقط وفق نظام حماية البيانات في المملكة",
+    en: "Secure and private, contact only, per KSA data protection",
   },
   fields: {
     service: { ar: "الخدمة المطلوبة", en: "Service needed" },
@@ -63,6 +63,8 @@ export const LEAD_STORAGE_KEYS = {
   submitted: "asim-lead-submitted",
   dismissedAt: "asim-lead-dismissed-at",
   scrollShown: "asim-lead-scroll-shown",
+  followUpDismissed: "asim-whatsapp-followup-dismissed",
+  followUpShown: "asim-whatsapp-followup-shown",
 } as const;
 
 export const LEAD_MODAL_TIMING = {
@@ -70,4 +72,24 @@ export const LEAD_MODAL_TIMING = {
   pageChangeDelayMs: 2000,
   dismissCooldownMs: 30 * 60 * 1000,
   scrollThreshold: 0.45,
+  followUpDelayMs: 8000,
+} as const;
+
+export const WHATSAPP_FOLLOW_UP = {
+  title: {
+    ar: "هل تحتاج خدمة مكيفات في الرياض؟",
+    en: "Need AC Service in Riyadh?",
+  },
+  subtitle: {
+    ar: "احجز تنظيف أو تصليح أو تعبئة فريون أو تركيب المكيفات عبر واتساب. رد سريع للمنازل والمحلات في الرياض.",
+    en: "Book AC cleaning, repair, gas refill, or installation on WhatsApp. Fast reply for homes and businesses in Riyadh.",
+  },
+  cta: {
+    ar: "تواصل عبر واتساب",
+    en: "Contact on WhatsApp",
+  },
+  close: {
+    ar: "إغلاق",
+    en: "Close",
+  },
 } as const;

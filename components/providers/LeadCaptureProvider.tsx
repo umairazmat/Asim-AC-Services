@@ -11,6 +11,7 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 import { LeadCaptureModal } from "@/components/ui/LeadCaptureModal";
+import { WhatsAppFollowUpModal } from "@/components/ui/WhatsAppFollowUpModal";
 import {
   LEAD_MODAL_TIMING,
   LEAD_STORAGE_KEYS,
@@ -55,12 +56,22 @@ function isDismissCooldownActive(): boolean {
   return elapsed < LEAD_MODAL_TIMING.dismissCooldownMs;
 }
 
+function canShowFollowUp(): boolean {
+  if (typeof window === "undefined") return false;
+  if (hasSubmitted()) return false;
+  if (sessionStorage.getItem(LEAD_STORAGE_KEYS.followUpDismissed) === "1") return false;
+  if (sessionStorage.getItem(LEAD_STORAGE_KEYS.followUpShown) === "1") return false;
+  return true;
+}
+
 export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderProps) {
   const [open, setOpen] = useState(false);
+  const [followUpOpen, setFollowUpOpen] = useState(false);
   const [initialIssue, setInitialIssue] = useState("");
   const [initialServiceId, setInitialServiceId] = useState<ServiceId | "">("");
   const pathname = usePathname();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const followUpTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const initialShownRef = useRef(false);
   const prevPathRef = useRef(pathname);
 
@@ -71,9 +82,16 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
     }
   }, []);
 
+  const clearFollowUpTimer = useCallback(() => {
+    if (followUpTimerRef.current) {
+      clearTimeout(followUpTimerRef.current);
+      followUpTimerRef.current = null;
+    }
+  }, []);
+
   const canAutoShow = useCallback(() => {
-    return !hasSubmitted() && !isDismissCooldownActive() && !open;
-  }, [open]);
+    return !hasSubmitted() && !isDismissCooldownActive() && !open && !followUpOpen;
+  }, [open, followUpOpen]);
 
   const scheduleOpen = useCallback(
     (delayMs: number) => {
@@ -89,26 +107,50 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
     [canAutoShow, clearTimer],
   );
 
-  const openModal = useCallback((options?: LeadModalOptions) => {
-    clearTimer();
-    setInitialIssue(options?.issue ?? "");
-    setInitialServiceId(options?.serviceId ?? "");
-    setOpen(true);
-  }, [clearTimer]);
+  const scheduleFollowUp = useCallback(() => {
+    clearFollowUpTimer();
+    if (!canShowFollowUp()) return;
+
+    followUpTimerRef.current = setTimeout(() => {
+      if (!open && !followUpOpen && canShowFollowUp()) {
+        sessionStorage.setItem(LEAD_STORAGE_KEYS.followUpShown, "1");
+        setFollowUpOpen(true);
+      }
+    }, LEAD_MODAL_TIMING.followUpDelayMs);
+  }, [clearFollowUpTimer, open, followUpOpen]);
+
+  const openModal = useCallback(
+    (options?: LeadModalOptions) => {
+      clearTimer();
+      clearFollowUpTimer();
+      setFollowUpOpen(false);
+      setInitialIssue(options?.issue ?? "");
+      setInitialServiceId(options?.serviceId ?? "");
+      setOpen(true);
+    },
+    [clearTimer, clearFollowUpTimer],
+  );
 
   const closeModal = useCallback(() => {
     setOpen(false);
     if (!hasSubmitted()) {
       sessionStorage.setItem(LEAD_STORAGE_KEYS.dismissedAt, String(Date.now()));
+      scheduleFollowUp();
     }
+  }, [scheduleFollowUp]);
+
+  const closeFollowUp = useCallback(() => {
+    setFollowUpOpen(false);
+    sessionStorage.setItem(LEAD_STORAGE_KEYS.followUpDismissed, "1");
   }, []);
 
   const handleSubmitted = useCallback(() => {
     localStorage.setItem(LEAD_STORAGE_KEYS.submitted, "1");
+    clearFollowUpTimer();
+    setFollowUpOpen(false);
     setOpen(false);
-  }, []);
+  }, [clearFollowUpTimer]);
 
-  // Initial 3-second delay
   useEffect(() => {
     if (initialShownRef.current || hasSubmitted()) return;
     initialShownRef.current = true;
@@ -116,14 +158,12 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
     return clearTimer;
   }, [scheduleOpen, clearTimer]);
 
-  // Re-show on page navigation if not submitted
   useEffect(() => {
     if (prevPathRef.current === pathname) return;
     prevPathRef.current = pathname;
     scheduleOpen(LEAD_MODAL_TIMING.pageChangeDelayMs);
   }, [pathname, scheduleOpen]);
 
-  // Re-show on scroll past threshold (once per session)
   useEffect(() => {
     if (hasSubmitted()) return;
 
@@ -146,12 +186,14 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
   }, [canAutoShow]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open && !followUpOpen) return;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [open, followUpOpen]);
+
+  useEffect(() => clearFollowUpTimer, [clearFollowUpTimer]);
 
   return (
     <LeadCaptureContext.Provider value={{ openModal, closeModal }}>
@@ -164,6 +206,7 @@ export function LeadCaptureProvider({ locale, children }: LeadCaptureProviderPro
         onClose={closeModal}
         onSubmitted={handleSubmitted}
       />
+      <WhatsAppFollowUpModal locale={locale} open={followUpOpen} onClose={closeFollowUp} />
     </LeadCaptureContext.Provider>
   );
 }

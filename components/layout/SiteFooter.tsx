@@ -7,10 +7,11 @@ import { BRAND } from "@/lib/constants/brand";
 import { BRAND_ASSETS } from "@/lib/constants/brand-assets";
 import { CONTACT, getWhatsAppUrl } from "@/lib/constants/contact";
 import { FOOTER } from "@/lib/constants/footer";
+import { FOOTER_EXTRA_PAGE_LINKS } from "@/lib/constants/home-seo-links";
 import { getNavHref, NAV_ITEMS } from "@/lib/constants/navigation";
 import { SERVICES, TRUST_BADGES } from "@/lib/constants/services";
 import type { Locale } from "@/lib/i18n/config";
-import type { PageId } from "@/lib/i18n/pages";
+import { getPageHref, PAGES, type PageId } from "@/lib/i18n/pages";
 
 type SiteFooterProps = {
   locale: Locale;
@@ -133,6 +134,13 @@ export function SiteFooter({ locale }: SiteFooterProps) {
                     className="site-footer__link"
                   >
                     {service.label[locale]}
+                  </Link>
+                </li>
+              ))}
+              {FOOTER_EXTRA_PAGE_LINKS.map((pageId) => (
+                <li key={pageId}>
+                  <Link href={getPageHref(locale, pageId)} className="site-footer__link">
+                    {PAGES[pageId].title[locale]}
                   </Link>
                 </li>
               ))}

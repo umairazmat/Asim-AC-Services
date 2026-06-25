@@ -51,7 +51,7 @@ export function PainStripSection({ locale }: PainStripSectionProps) {
                 className={`home-pain-strip__card home-pain-strip__card--${card.color} fade-up`}
                 style={{ animationDelay: `${0.06 + index * 0.04}s` }}
                 onClick={() => openPainCard(card)}
-                aria-label={`${card.label[locale]} — ${painStrip.cardAction[locale]}`}
+                aria-label={`${card.label[locale]}, ${painStrip.cardAction[locale]}`}
               >
                 <span
                   className={`home-pain-strip__icon icon-badge ${ICON_BADGE_CLASS[card.color]}`}

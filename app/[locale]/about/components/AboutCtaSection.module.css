@@ -1,0 +1,134 @@
+.section {
+  box-sizing: border-box;
+  width: 100%;
+  padding-block: var(--home-section-padding-y);
+  padding-inline: 0;
+}
+
+.shell {
+  box-sizing: border-box;
+  width: min(100%, var(--home-section-max-width));
+  margin-inline: auto;
+  padding-inline: var(--home-section-safe-x-start) var(--home-section-safe-x-end);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: 1.35rem;
+  text-align: center;
+  color: #ffffff;
+  background: linear-gradient(165deg, #1b3a6b 0%, #0f2447 52%, #122a52 100%);
+  box-shadow:
+    0 22px 56px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(125, 211, 252, 0.12);
+}
+
+:global([data-theme="dark"]) .panel {
+  background: linear-gradient(165deg, #1a3563 0%, #0d1f3d 52%, #101f3f 100%);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(125, 211, 252, 0.14);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+}
+
+:global(html[dir="rtl"]) .eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.title {
+  margin: 0;
+  max-width: 36rem;
+  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  line-height: 1.28;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.subline {
+  margin: 0;
+  max-width: 40rem;
+  font-size: clamp(0.88rem, 2.1vw, 1rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+.actions :global(.home-hero__ctas) {
+  justify-content: center;
+  margin-top: 0;
+}
+
+.actions :global(.home-hero__cta--secondary) {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.actions :global(.home-hero__cta--secondary:hover) {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.contactCta {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+.contactCta:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.contactArrow {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+}
+
+:global(html[dir="rtl"]) .contactArrow {
+  transform: scaleX(-1);
+}
+
+@media (min-width: 40rem) {
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .actions :global(.home-hero__cta),
+  .contactCta {
+    flex: 0 1 auto;
+    min-width: 8.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .actions :global(.home-hero__cta) {
+    min-height: 2.75rem;
+    font-size: 0.86rem;
+    padding-inline: 1.15rem;
+  }
+}

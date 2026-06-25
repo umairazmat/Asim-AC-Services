@@ -1,6 +1,6 @@
 import { isValidPhoneNumber, parsePhoneNumber } from "libphonenumber-js";
 import type { Value } from "react-phone-number-input";
-import { QUOTE_ISSUES } from "@/lib/constants/quote-issues";
+import { findBookFormOption } from "@/lib/constants/quote-issues";
 import { RIYADH_AREAS } from "@/lib/constants/riyadh-areas";
 import type { LeadPayload } from "@/lib/leads/types";
 import type { Locale } from "@/lib/i18n/config";
@@ -21,7 +21,7 @@ export function buildLeadPayload(input: BuildLeadInput): LeadPayload | null {
   const parsed = parsePhoneNumber(phoneE164);
   if (!parsed) return null;
 
-  const issue = QUOTE_ISSUES.find((item) => item.id === issueId);
+  const issue = findBookFormOption(issueId);
   if (!issue) return null;
 
   const area = areaId ? RIYADH_AREAS.find((item) => item.id === areaId) : undefined;

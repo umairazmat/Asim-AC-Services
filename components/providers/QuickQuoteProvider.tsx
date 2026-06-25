@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import type { QuoteIssueId } from "@/lib/constants/quote-issues";
+import { scrollToBookService } from "@/lib/scroll-to-book-service";
 
 type QuickQuoteOptions = {
   issueId?: QuoteIssueId;
@@ -53,22 +54,7 @@ export function QuickQuoteProvider({ children }: QuickQuoteProviderProps) {
       setPendingIssueId(options.issueId);
     }
 
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const headerOffset = Number.parseFloat(
-      getComputedStyle(document.documentElement).getPropertyValue("--site-header-offset"),
-    );
-    const top = section.getBoundingClientRect().top + window.scrollY - headerOffset - 12;
-
-    window.scrollTo({ top, behavior: "smooth" });
-
-    window.setTimeout(() => {
-      const focusTarget = section.querySelector<HTMLElement>(
-        "[data-quick-quote-focus]",
-      );
-      focusTarget?.focus({ preventScroll: true });
-    }, 450);
+    scrollToBookService();
   }, []);
 
   const consumePendingIssue = useCallback(() => {

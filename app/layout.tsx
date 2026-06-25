@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Asim AC Services",
   },
   description:
-    "Professional AC cleaning, maintenance, and repair in Riyadh. Coming soon — contact us on WhatsApp.",
+    "Professional AC cleaning, maintenance, repair, and installation in Riyadh, Saudi Arabia (KSA). Book on WhatsApp.",
   alternates: {
     canonical: `/${defaultLocale}`,
     languages: {
@@ -39,7 +39,15 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
+  },
+  manifest: "/manifest.webmanifest",
+  other: {
+    "ai-content-index": "/llms.txt",
+    "full-ai-content-index": "/llms-full.txt",
   },
   openGraph: {
     type: "website",
