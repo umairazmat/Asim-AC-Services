@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { LocaleHtmlSync } from "@/components/i18n/LocaleHtmlSync";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteQuickQuoteShell } from "@/components/layout/SiteQuickQuoteShell";
 import { LeadCaptureProvider } from "@/components/providers/LeadCaptureProvider";
+import { ScrollToTopButton } from "@/components/ui/ScrollToTopButton";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { isLocale, locales, type Locale } from "@/lib/i18n/config";
 
@@ -35,8 +37,8 @@ export async function generateMetadata({
       template: isArabic ? "%s | خدمة المكيفات عاصم" : "%s | Asim AC Services",
     },
     description: isArabic
-      ? "خدمة مكيفات احترافية في الرياض. تواصل معنا عبر واتساب للحجز والاستفسار."
-      : "Professional AC cleaning, maintenance, and repair in Riyadh. Contact us on WhatsApp to book or inquire.",
+      ? "خدمة مكيفات احترافية في الرياض، المملكة العربية السعودية. تواصل عبر واتساب للحجز والاستفسار."
+      : "Professional AC services in Riyadh, Saudi Arabia (KSA). Contact us on WhatsApp to book or inquire.",
   };
 }
 
@@ -52,8 +54,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="site-shell">
         <LocaleHtmlSync />
         <SiteHeader locale={locale} />
-        <main className="site-main">{children}</main>
+        <SiteQuickQuoteShell locale={locale}>
+          <main className="site-main">{children}</main>
+        </SiteQuickQuoteShell>
         <SiteFooter locale={locale} />
+        <ScrollToTopButton locale={locale} />
         <WhatsAppButton locale={locale} />
       </div>
     </LeadCaptureProvider>

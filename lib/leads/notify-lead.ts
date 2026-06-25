@@ -14,7 +14,7 @@ async function sendLeadEmail(lead: LeadPayload): Promise<boolean> {
   }
 
   const resend = new Resend(apiKey);
-  const subject = `New AC service request — ${lead.areaLabel}`;
+  const subject = `New AC service request: ${lead.areaLabel ?? lead.serviceLabel}`;
 
   const { error } = await resend.emails.send({
     from: fromEmail,

@@ -9,14 +9,14 @@ export function formatLeadWhatsAppMessage(lead: LeadPayload): string {
         "مرحباً، أود حجز خدمة المكيفات:",
         "",
         `الخدمة: ${lead.serviceLabel}`,
-        `الحي: ${lead.areaLabel}`,
+        lead.areaLabel ? `الحي: ${lead.areaLabel}` : null,
         `الجوال: +${lead.countryDial} ${lead.phone}`,
       ]
     : [
         "Hello, I would like to book an AC service:",
         "",
         `Service: ${lead.serviceLabel}`,
-        `Area: ${lead.areaLabel}`,
+        lead.areaLabel ? `Area: ${lead.areaLabel}` : null,
         `Phone: +${lead.countryDial} ${lead.phone}`,
       ];
 
@@ -29,7 +29,7 @@ export function formatLeadWhatsAppMessage(lead: LeadPayload): string {
     lines.push(isAr ? `الموقع: ${mapsUrl}` : `Location: ${mapsUrl}`);
   }
 
-  return lines.join("\n");
+  return lines.filter((line): line is string => line !== null).join("\n");
 }
 
 export function getLeadWhatsAppUrl(lead: LeadPayload): string {

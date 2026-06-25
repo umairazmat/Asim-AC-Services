@@ -13,7 +13,7 @@ export function BookNowCta({ locale }: BookNowCtaProps) {
   return (
     <button
       type="button"
-      onClick={openModal}
+      onClick={() => openModal()}
       className="cta-bar group flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-white sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3.5 lg:rounded-3xl lg:px-5 lg:py-4"
     >
       <span className="cta-icon-wrap flex h-9 w-9 shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 lg:h-12 lg:w-12">

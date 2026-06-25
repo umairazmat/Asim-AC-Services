@@ -1,7 +1,7 @@
 "use client";
 
-import { WhatsAppIcon } from "@/components/icons/SocialIcons";
-import { useLeadCapture } from "@/components/providers/LeadCaptureProvider";
+import { scrollToBookService } from "@/lib/scroll-to-book-service";
+import { BOOK_SERVICE_SECTION } from "@/lib/constants/book-service-content";
 import type { Locale } from "@/lib/i18n/config";
 
 type FooterBookButtonProps = {
@@ -9,11 +9,13 @@ type FooterBookButtonProps = {
 };
 
 export function FooterBookButton({ locale }: FooterBookButtonProps) {
-  const { openModal } = useLeadCapture();
-
   return (
-    <button type="button" onClick={openModal} className="site-footer__book-btn">
-      {locale === "ar" ? "احجز الخدمة" : "Book Service"}
+    <button
+      type="button"
+      onClick={() => scrollToBookService()}
+      className="site-footer__book-btn"
+    >
+      {BOOK_SERVICE_SECTION.navCta.navLabel[locale]}
     </button>
   );
 }

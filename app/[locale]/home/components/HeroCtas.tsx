@@ -3,13 +3,15 @@
 import { HOME_CONTENT } from "@/app/[locale]/home/content";
 import { CONTACT } from "@/lib/constants/contact";
 import { useLeadCapture } from "@/components/providers/LeadCaptureProvider";
+import type { ServiceId } from "@/lib/constants/services";
 import type { Locale } from "@/lib/i18n/config";
 
 type HeroCtasProps = {
   locale: Locale;
+  serviceId?: ServiceId;
 };
 
-export function HeroCtas({ locale }: HeroCtasProps) {
+export function HeroCtas({ locale, serviceId }: HeroCtasProps) {
   const { openModal } = useLeadCapture();
   const { bookCta, callCta } = HOME_CONTENT.hero;
 
@@ -17,7 +19,7 @@ export function HeroCtas({ locale }: HeroCtasProps) {
     <div className="home-hero__ctas">
       <button
         type="button"
-        onClick={openModal}
+        onClick={() => openModal(serviceId ? { serviceId } : undefined)}
         className="home-hero__cta home-hero__cta--primary"
       >
         <span>{bookCta[locale]}</span>

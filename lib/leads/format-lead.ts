@@ -2,13 +2,13 @@ import type { LeadPayload } from "@/lib/leads/types";
 
 export function formatLeadPlainText(lead: LeadPayload): string {
   const lines = [
-    "🆕 New lead — Asim AC Services",
+    "🆕 New lead: Asim AC Services",
     "",
     `Service: ${lead.serviceLabel}`,
-    `Area: ${lead.areaLabel}`,
+    lead.areaLabel ? `Area: ${lead.areaLabel}` : null,
     `Phone: +${lead.countryDial} ${lead.phone}`,
     `Language: ${lead.locale === "ar" ? "Arabic" : "English"}`,
-  ];
+  ].filter((line): line is string => line !== null);
 
   if (lead.issue?.trim()) {
     lines.push(`Issue: ${lead.issue.trim()}`);
@@ -37,12 +37,16 @@ export function formatLeadHtml(lead: LeadPayload): string {
     ? `<tr><td style="padding:6px 12px;font-weight:600;">Location</td><td style="padding:6px 12px;"><a href="https://www.google.com/maps?q=${lead.location.lat},${lead.location.lng}">View on map</a></td></tr>`
     : "";
 
+  const areaRow = lead.areaLabel
+    ? `<tr><td style="padding:6px 12px;font-weight:600;">Area</td><td style="padding:6px 12px;">${escapeHtml(lead.areaLabel)}</td></tr>`
+    : "";
+
   return `
     <div style="font-family:system-ui,sans-serif;max-width:520px;">
       <h2 style="color:#1b3a6b;margin:0 0 12px;">New service request</h2>
       <table style="border-collapse:collapse;width:100%;font-size:14px;">
         <tr><td style="padding:6px 12px;font-weight:600;">Service</td><td style="padding:6px 12px;">${escapeHtml(lead.serviceLabel)}</td></tr>
-        <tr><td style="padding:6px 12px;font-weight:600;">Area</td><td style="padding:6px 12px;">${escapeHtml(lead.areaLabel)}</td></tr>
+        ${areaRow}
         <tr><td style="padding:6px 12px;font-weight:600;">Phone</td><td style="padding:6px 12px;" dir="ltr">+${escapeHtml(lead.countryDial)} ${escapeHtml(lead.phone)}</td></tr>
         <tr><td style="padding:6px 12px;font-weight:600;">Language</td><td style="padding:6px 12px;">${lead.locale === "ar" ? "Arabic" : "English"}</td></tr>
         ${issueRow}
