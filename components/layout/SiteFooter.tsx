@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
 import { FooterBookButton } from "@/components/layout/FooterBookButton";
-import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { BRAND } from "@/lib/constants/brand";
 import { BRAND_ASSETS } from "@/lib/constants/brand-assets";
 import { CONTACT, getWhatsAppUrl } from "@/lib/constants/contact";
+import { SITE_CREDITS } from "@/lib/constants/credits";
 import { FOOTER } from "@/lib/constants/footer";
 import { FOOTER_EXTRA_PAGE_LINKS } from "@/lib/constants/home-seo-links";
 import { getNavHref, NAV_ITEMS } from "@/lib/constants/navigation";
-import { SERVICES, TRUST_BADGES } from "@/lib/constants/services";
+import { SERVICES } from "@/lib/constants/services";
 import type { Locale } from "@/lib/i18n/config";
 import { getPageHref, PAGES, type PageId } from "@/lib/i18n/pages";
 
@@ -40,12 +40,6 @@ const SOCIAL_ITEMS = [
     className: "site-footer__social-link--whatsapp",
   },
 ] as const;
-
-const TRUST_ICON_CLASS: Record<(typeof TRUST_BADGES)[number]["color"], string> = {
-  mint: "site-footer__badge-icon--mint",
-  emerald: "site-footer__badge-icon--emerald",
-  violet: "site-footer__badge-icon--violet",
-};
 
 const SERVICE_PAGE_IDS: Record<(typeof SERVICES)[number]["id"], PageId> = {
   cleaning: "ac-cleaning-riyadh",
@@ -222,19 +216,36 @@ export function SiteFooter({ locale }: SiteFooterProps) {
         <div className="header-shell site-footer__bar-inner">
           <p className="site-footer__copyright">{FOOTER.copyright[locale]}</p>
 
-          <div className="site-footer__badges" aria-label={locale === "ar" ? "شارات الثقة" : "Trust badges"}>
-            {TRUST_BADGES.map((badge) => (
-              <span key={badge.id} className="site-footer__badge">
-                <span
-                  className={`site-footer__badge-icon ${TRUST_ICON_CLASS[badge.color]}`}
-                  aria-hidden="true"
-                >
-                  <ServiceIcon name={badge.icon} className="h-3.5 w-3.5" />
-                </span>
-                <span>{FOOTER.barBadges[badge.id][locale]}</span>
-              </span>
-            ))}
-          </div>
+          <p className="site-footer__credits">
+            {SITE_CREDITS.developedLine[locale]}{" "}
+            <a
+              href={SITE_CREDITS.devlotech.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="site-footer__credits-link"
+            >
+              {SITE_CREDITS.devlotech.name}
+            </a>
+            <span className="site-footer__credits-sep" aria-hidden="true">
+              {locale === "ar" ? " و " : " & "}
+            </span>
+            <a
+              href={SITE_CREDITS.umair.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="site-footer__credits-link"
+            >
+              {SITE_CREDITS.umair.name}
+            </a>
+          </p>
+
+          <a href={SITE_CREDITS.contactHref} className="site-footer__credits-cta">
+            {SITE_CREDITS.cta[locale]}
+            <span className="site-footer__credits-arrow" aria-hidden="true">
+              {" "}
+              →
+            </span>
+          </a>
         </div>
       </div>
     </footer>

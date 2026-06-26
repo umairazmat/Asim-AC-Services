@@ -3744,125 +3744,95 @@ html[dir="rtl"] .site-footer__logo-image {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 0 1.25rem;
-  padding-inline-end: max(0.75rem, calc(4.5rem + env(safe-area-inset-inline-end, env(safe-area-inset-right, 0px))));
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding-block: 0.95rem 1.15rem;
+  padding-inline: max(0.75rem, calc(4.5rem + env(safe-area-inset-inline-start, env(safe-area-inset-left, 0px))))
+    max(0.75rem, calc(4.5rem + env(safe-area-inset-inline-end, env(safe-area-inset-right, 0px))));
+  text-align: center;
+}
+
+.site-footer__copyright,
+.site-footer__credits,
+.site-footer__credits-cta {
+  width: 100%;
+  max-width: 100%;
   text-align: center;
 }
 
 .site-footer__copyright {
+  margin: 0;
   font-size: 0.72rem;
-  line-height: 1.5;
-  color: var(--footer-muted);
-  text-wrap: pretty;
-}
-
-.site-footer__badges {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.4rem;
-}
-
-.site-footer__bar .site-footer__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.55rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  line-height: 1.4;
   color: var(--footer-muted);
   white-space: nowrap;
-  flex: 0 0 auto;
+}
+
+.site-footer__credits {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: var(--footer-muted);
+}
+
+.site-footer__credits-sep {
+  opacity: 0.75;
+}
+
+.site-footer__credits-link {
+  color: rgba(79, 195, 247, 0.92);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer__credits-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.site-footer__credits-cta {
+  display: inline-block;
+  margin: 0;
+  font-size: 0.66rem;
+  line-height: 1.5;
+  color: rgba(79, 195, 247, 0.88);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.site-footer__credits-cta:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.site-footer__credits-arrow {
+  font-size: 0.85em;
+  opacity: 0.9;
+}
+
+html[dir="rtl"] .site-footer__credits-arrow {
+  transform: scaleX(-1);
 }
 
 @media (max-width: 47.99rem) {
-  .site-footer__bar-inner {
-    align-items: stretch;
-    text-align: center;
-  }
-
   .site-footer__copyright {
-    max-width: 100%;
-    overflow: visible;
-    text-overflow: unset;
     white-space: normal;
-    word-break: normal;
-    overflow-wrap: normal;
+    text-wrap: pretty;
   }
 
-  .site-footer__badges {
-    justify-content: center;
-    row-gap: 0.45rem;
-    max-width: 100%;
-  }
-}
-
-.site-footer__badge-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  flex-shrink: 0;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.site-footer__badge-icon--mint {
-  background: linear-gradient(155deg, #34d399 0%, #059669 100%);
-  color: #ecfdf5;
-}
-
-.site-footer__badge-icon--emerald {
-  background: linear-gradient(155deg, #4ade80 0%, #16a34a 100%);
-  color: #f0fdf4;
-}
-
-.site-footer__badge-icon--violet {
-  background: linear-gradient(155deg, #a78bfa 0%, #7c3aed 100%);
-  color: #f5f3ff;
-}
-
-@media (min-width: 48rem) {
-  .site-footer__bar-inner {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    text-align: start;
-    padding-inline-end: max(1rem, calc(5rem + env(safe-area-inset-inline-end, env(safe-area-inset-right, 0px))));
-  }
-
-  .site-footer__copyright {
-    flex: 1 1 auto;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .site-footer__badges {
-    flex: 0 0 auto;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    max-width: min(100%, 22rem);
+  .site-footer__credits-cta {
+    white-space: normal;
+    text-wrap: pretty;
   }
 }
 
 @media (min-width: 64rem) {
   .site-footer__bar-inner {
-    /* Reserve space for floating "Chat on WhatsApp" pill */
-    padding-inline-end: max(1.5rem, calc(13.5rem + env(safe-area-inset-inline-end, env(safe-area-inset-right, 0px))));
-  }
-
-  .site-footer__badges {
-    max-width: min(100%, 26rem);
+    padding-inline: max(1.5rem, calc(13.5rem + env(safe-area-inset-inline-start, env(safe-area-inset-left, 0px))))
+      max(1.5rem, calc(13.5rem + env(safe-area-inset-inline-end, env(safe-area-inset-right, 0px))));
   }
 }
 

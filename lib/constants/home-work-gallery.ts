@@ -195,27 +195,10 @@ export const HOME_WORK_GALLERY: WorkGalleryItem[] = [
     },
   },
   {
-    id: "video-cleaning-rooftop-01",
-    type: "video",
-    category: "cleaning",
-    src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh01,
-    poster: BRAND_ASSETS.photos.galleryGreeCleaningTechnicianRiyadh,
-    objectPosition: "center 40%",
-    title: { ar: "فيديو تنظيف مكيفات على السطح", en: "Rooftop AC Cleaning Video" },
-    caption: {
-      ar: "مقطع قصير من تنظيف وحدات مكيفات GREE على سطح مبنى في الرياض",
-      en: "Short clip of GREE rooftop AC unit cleaning in Riyadh",
-    },
-    alt: {
-      ar: "فيديو لتنظيف مكيفات GREE على سطح مبنى في الرياض من عاصم لخدمات المكيفات",
-      en: "Asim AC Services rooftop GREE AC cleaning video in Riyadh",
-    },
-  },
-  {
-    id: "video-cleaning-rooftop-02",
+    id: "video-gas-refill-rooftop-01",
     type: "video",
     category: "gas",
-    src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh02,
+    src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh01,
     poster: BRAND_ASSETS.photos.galleryGreeGasRefillKingdomRiyadh,
     objectPosition: "center bottom",
     title: { ar: "فيديو فحص وتعبئة فريون", en: "AC Gas Check & Refill Video" },
@@ -226,6 +209,23 @@ export const HOME_WORK_GALLERY: WorkGalleryItem[] = [
     alt: {
       ar: "فيديو لفحص غاز وتعبئة فريون مكيف في الرياض من عاصم لخدمات المكيفات",
       en: "Asim AC Services AC gas check and refill video in Riyadh",
+    },
+  },
+  {
+    id: "video-cleaning-rooftop-02",
+    type: "video",
+    category: "cleaning",
+    src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh02,
+    poster: BRAND_ASSETS.photos.galleryGreeCleaningTechnicianRiyadh,
+    objectPosition: "center 40%",
+    title: { ar: "فيديو تنظيف مكيفات على السطح", en: "Rooftop AC Cleaning Video" },
+    caption: {
+      ar: "مقطع قصير من تنظيف وحدات مكيفات GREE على سطح مبنى في الرياض",
+      en: "Short clip of GREE rooftop AC unit cleaning in Riyadh",
+    },
+    alt: {
+      ar: "فيديو لتنظيف مكيفات GREE على سطح مبنى في الرياض من عاصم لخدمات المكيفات",
+      en: "Asim AC Services rooftop GREE AC cleaning video in Riyadh",
     },
   },
   {
@@ -259,7 +259,7 @@ export function pickFeaturedItem(items: WorkGalleryItem[]): WorkGalleryItem | un
 
 export const HOME_GALLERY_TEASER_COUNT = 4;
 
-/** Curated homepage teaser — image, video, image, video (cleaning then gas refill in Riyadh). */
+/** Curated homepage teaser — image, video, image, video (cleaning photo → gas video → gas photo → cleaning video). */
 export const HOME_GALLERY_TEASER_ITEMS: WorkGalleryItem[] = [
   {
     id: "teaser-cleaning-gree-rooftop",
@@ -278,20 +278,20 @@ export const HOME_GALLERY_TEASER_ITEMS: WorkGalleryItem[] = [
     },
   },
   {
-    id: "teaser-video-cleaning-rooftop-01",
+    id: "teaser-video-gas-refill-rooftop-01",
     type: "video",
-    category: "cleaning",
+    category: "gas",
     src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh01,
-    poster: BRAND_ASSETS.photos.galleryGreeCleaningTechnicianRiyadh,
-    objectPosition: "center 40%",
-    title: { ar: "فيديو تنظيف مكيفات على السطح", en: "Rooftop AC Cleaning Video" },
+    poster: BRAND_ASSETS.photos.galleryGreeGasRefillKingdomRiyadh,
+    objectPosition: "center bottom",
+    title: { ar: "فيديو فحص وتعبئة فريون", en: "AC Gas Check & Refill Video" },
     caption: {
-      ar: "مقطع قصير من تنظيف مكيفات على سطح مبنى في الرياض",
-      en: "Short rooftop AC cleaning clip in Riyadh",
+      ar: "مقطع قصير من فحص غاز وتعبئة فريون مكيف في الرياض",
+      en: "Short AC gas check and refill clip in Riyadh",
     },
     alt: {
-      ar: "فيديو لتنظيف مكيفات على سطح مبنى في الرياض من عاصم لخدمات المكيفات",
-      en: "Asim AC Services rooftop AC cleaning video in Riyadh",
+      ar: "فيديو لفحص غاز وتعبئة فريون مكيف في الرياض من عاصم لخدمات المكيفات",
+      en: "Asim AC Services AC gas check and refill video in Riyadh",
     },
   },
   {
@@ -311,20 +311,20 @@ export const HOME_GALLERY_TEASER_ITEMS: WorkGalleryItem[] = [
     },
   },
   {
-    id: "teaser-video-gas-refill-rooftop-02",
+    id: "teaser-video-cleaning-rooftop-02",
     type: "video",
-    category: "gas",
+    category: "cleaning",
     src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh02,
-    poster: BRAND_ASSETS.photos.galleryGreeGasRefillKingdomRiyadh,
-    objectPosition: "center bottom",
-    title: { ar: "فيديو فحص وتعبئة فريون", en: "AC Gas Check & Refill Video" },
+    poster: BRAND_ASSETS.photos.galleryGreeCleaningTechnicianRiyadh,
+    objectPosition: "center 40%",
+    title: { ar: "فيديو تنظيف مكيفات على السطح", en: "Rooftop AC Cleaning Video" },
     caption: {
-      ar: "مقطع قصير من فحص غاز وتعبئة فريون مكيف في الرياض",
-      en: "Short AC gas check and refill clip in Riyadh",
+      ar: "مقطع قصير من تنظيف مكيفات على سطح مبنى في الرياض",
+      en: "Short rooftop AC cleaning clip in Riyadh",
     },
     alt: {
-      ar: "فيديو لفحص غاز وتعبئة فريون مكيف في الرياض من عاصم لخدمات المكيفات",
-      en: "Asim AC Services AC gas check and refill video in Riyadh",
+      ar: "فيديو لتنظيف مكيفات على سطح مبنى في الرياض من عاصم لخدمات المكيفات",
+      en: "Asim AC Services rooftop AC cleaning video in Riyadh",
     },
   },
 ];
