@@ -99,19 +99,19 @@ export const GALLERY_MEDIA = {
   ],
   videos: [
     {
-      id: "rooftop-cleaning-01",
+      id: "rooftop-gas-refill-01",
       src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh01,
       alt: {
-        ar: "فيديو لخدمة تنظيف مكيفات على سطح مبنى في الرياض",
-        en: "Rooftop AC cleaning service video in Riyadh",
+        ar: "فيديو لفحص غاز وتعبئة فريون مكيف في الرياض",
+        en: "AC gas check and refill service video in Riyadh",
       },
     },
     {
       id: "rooftop-cleaning-02",
       src: BRAND_ASSETS.videos.rooftopServiceCleaningRiyadh02,
       alt: {
-        ar: "فيديو لصيانة وتنظيف مكيفات خارجية في الرياض",
-        en: "Outdoor AC maintenance and cleaning service video in Riyadh",
+        ar: "فيديو لخدمة تنظيف مكيفات على سطح مبنى في الرياض",
+        en: "Rooftop AC cleaning service video in Riyadh",
       },
     },
   ],
